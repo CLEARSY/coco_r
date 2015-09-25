@@ -1,4 +1,5 @@
 # CMakeLists pour la compilation de COCO/R
+cmake_minimum_required(VERSION 3.16)
 project(COCO_R)
 
 set(COCO_R_SRC
@@ -54,6 +55,9 @@ set(COCO_R_HEADERS
 
 if(MINGW)
 set(EXTRA_SRC wmain.cpp)
+# -O3 causes a segfault on windows
+add_compile_options(-O0)
 endif(MINGW)
 
 add_executable(cococpp ${COCO_R_HEADERS} ${COCO_R_SRC} ${EXTRA_SRC})
+
